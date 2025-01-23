@@ -21,5 +21,6 @@ class SQLogClass {
     success = (message,withTime) => this.#printMessage(message,chalk.greenBright,withTime);
     request = (message) => this.#printRequestMessage(message,chalk.greenBright, "REQUEST")
     response = (message) => this.#printRequestMessage(message,chalk.blueBright, "RESPONSE")
+    enum = (message) => this.#printMessage(message,chalk.blue,false)
 }
 export const SQLog = new SQLogClass();

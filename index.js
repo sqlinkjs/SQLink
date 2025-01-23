@@ -12,6 +12,7 @@ program
   .option("update", STRINGS.UPDATE_COMMAND)
   .option("config", STRINGS.CONFIG_COMMAND)
   .option("host", STRINGS.HOST_STATIC_FILES)
+  .option("generate", STRINGS.GENERATE_ENUMS)
   .arguments("option")
   .action(async (command) => {
     await validateCommand(command);

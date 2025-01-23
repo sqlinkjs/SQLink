@@ -15,9 +15,9 @@ import authRouter from "./auth.js";
 import jwt from "jsonwebtoken"
 import { verifyUserAuth } from "../utils/config/auth.js";
 
-const websiteurl = "https://sqlinkjs.github.io/";
-const npmurl = "https://www.npmjs.com/package/sqlink";
-const githuburl = "https://github.com/Santhoshlm10/SQLink";
+const websiteurl = STRINGS.URLS.WEBSITE;
+const npmurl = STRINGS.URLS.NPM;
+const githuburl = STRINGS.URLS.GITHUB;
 
 export const styledUrl1 = chalk.blue.underline(websiteurl);
 export const styledUrl2 = chalk.green.underline(npmurl);
@@ -72,7 +72,7 @@ export async function initServer() {
   const server = app.listen(port, (err) => {
     if (err) {
       SQLog.error(
-        "Unable to start the server, the port might already be in use",
+        STRINGS.PORT_ALREADY_IN_USE,
         false
       );
     } else {
@@ -94,7 +94,7 @@ export async function initServer() {
       );
       if(process.argv[3] == "auth"){
         SQLog.info(
-          `Application is currently running with authentication, please include the token in your queries`,
+          STRINGS.RUNNING_IN_AUTH_MODE,
           true
         );
       }
@@ -104,11 +104,11 @@ export async function initServer() {
   server.on("error", (err) => {
     if (err.code === "EADDRINUSE") {
       SQLog.error(
-        "Unable to start the program, port might already be in use",
+        STRINGS.PORT_ALREADY_IN_USE,
         false
       );
     } else {
-      SQLog.error("Unable to start the program", false);
+      SQLog.error(STRINGS.UNABLE_TO_START_PROGRAM, false);
     }
     process.exit(1);
   });

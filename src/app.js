@@ -13,6 +13,7 @@ import { initServer } from "./server/init.js";
 import { initialiseDatabase } from "./mysql/connector.js";
 import { STRINGS } from "./strings.js";
 import { staticHost } from "./server/host.js";
+import {  generateEnum } from "./server/generator.js";
 
 export async function validateCommand(command) {
   if (command == "run") {
@@ -47,7 +48,12 @@ export async function validateCommand(command) {
     await lpFunction();
   } else if (command == "host") {
     staticHost();
-  } else {
+  } else if (command == "enum"){
+    await initConfiguration();
+    await initialiseDatabase();
+    await generateEnum();
+  }
+   else {
     SQLog.error(STRINGS.UNKNOWN_COMMAND, false);
   }
 }

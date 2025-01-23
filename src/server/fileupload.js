@@ -3,6 +3,7 @@ import multer from "multer";
 import { SQLog } from "../utils/logger/logger.js";
 import { db_config, uploads_folder } from "../utils/config/checker.js";
 import { getLocalIpAddress } from "../utils/config/ipconfig.js";
+import { STRINGS } from "../strings.js";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -27,7 +28,7 @@ fileuploadrouter.post("/", upload.array("files", 50), async (req, res) => {
     if(!req.files){
       return res.status(500).json({
         success:false,
-        message:"please use the payload key name as 'files' to upload"
+        message:STRINGS.REQUIRE_FILES_IN_UPLOAD
       })
     }
     const req_arr = req.files.map((item) => {
@@ -36,8 +37,8 @@ fileuploadrouter.post("/", upload.array("files", 50), async (req, res) => {
         accessURL:`http://${current_ip}:${port}/file/${item.filename}`
       }
     })
-    SQLog.request(`File upload request received`, true);
-    SQLog.response(`File uploaded successfully`,true)
+    SQLog.request(STRINGS.UPLOAD_REQUEST_RECEIVED, true);
+    SQLog.response(STRINGS.FILE_UPLOADED_SUCCESS,true)
     return res.json({
       success: true,
       data:req_arr
@@ -52,7 +53,7 @@ fileuploadrouter.post("/", upload.array("files", 50), async (req, res) => {
       .json({
         success: false,
         message:
-          "Unable to upload the file, please make sure file size is less than 500 MB",
+          STRINGS.FILE_SIZE_LIMIT_MESSAGE,
       });
   }
 });
