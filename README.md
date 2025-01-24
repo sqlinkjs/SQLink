@@ -40,8 +40,13 @@ Before using SQLink, ensure that you have npm installed on your machine. You can
 
 Before querying data from MySQL, you need to configure SQLink. To do this, run the following command:
 
+- **Without Auth**
   ```
   sqlink run
+  ```
+- **With Auth**
+  ```
+  sqlink run auth
   ```
 After running this command, you will be prompted in the console to enter your MySQL credentials.
 
@@ -155,6 +160,97 @@ https://localhost:3001/procedure/{procedureName}
 - **Method:** `GET`
 - **Response:**
   - `200 OK` if executed successfully.
+
+### Hosting Files
+
+You can also host local files throught http and access from URL.
+
+- **In your terminal**
+  ```bash
+  sqlink host YOUR_PORT YOUR_PATH
+  ```
+
+#### Example
+- **In your terminal**
+  ```bash
+  sqlink host 3002 Downloads
+  ```
+
+Open your browser and navigate to http://localhost:3002/static/<ANY_FILENAME_IN_DOWNLOADS_DIRECTORY>
+
+### Uploading Files
+
+SQLink provides inbuild API to upload files and returns the URL where the file is uploaded.
+
+- **URL**
+  ```bash
+  http://localhost:YOUR_PORT/upload
+  ```
+#### Example
+- **URL**
+  ```bash
+  http://localhost:3001/upload
+  ```
+- **Method:** `POST`
+- **Payload:**
+  ```json
+  {
+      "files": (file)
+  }
+  ```
+- **Response:**
+  - `200 OK` if uploaded successfully.
+  ```
+   {
+          "success": true,
+          "data": [
+              {
+                  "fieldname": "files",
+                  "originalname": "YOUR_FILE_NAME",
+                  "encoding": "7bit",
+                  "mimetype": "text/csv",
+                  "destination": "YOUR_DESTINATION",
+                  "filename": "YOUR_FILE_NAME",
+                  "path": "YOUR_PATH",
+                  "size": 512,
+                  "accessURL": "http://192.168.1.4:3001/file/YOUR_FILE_NAME.csv"
+              }
+          ]
+      }
+  ```
+> **Important:** Make sure the key in the payload remains as ***files***, using any other payload key will result in error response.
+
+
+### Generating Enum
+
+SQLink helps you to generate enum for your MySQL tables and you can use the generated enum directly in your code.
+
+- **Usage**
+  ```bash
+  sqlink enum <YOUR_TABLE_NAME>
+  ```
+- **Example**
+  ```bash
+  sqlink enum customer
+  ```
+- **Output**
+  ```bash
+  export enum CUSTOMERS_Enum {
+	customerNumber = "customerNumber",
+	customerName = "customerName",
+	contactLastName = "contactLastName",
+	contactFirstName = "contactFirstName",
+	phone = "phone",
+	addressLine1 = "addressLine1",
+	addressLine2 = "addressLine2",
+	city = "city",
+	state = "state",
+	postalCode = "postalCode",
+	country = "country",
+	salesRepEmployeeNumber = "salesRepEmployeeNumber",
+	creditLimit = "creditLimit"
+  }
+  ```
 
 ## Contributing
 
