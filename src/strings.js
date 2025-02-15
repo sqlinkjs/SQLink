@@ -1,5 +1,5 @@
 export const STRINGS = {
-  APP_VERSION: "1.1.8",
+  APP_VERSION: "1.1.9",
   APP_NAME: "sqlink",
   APP_DESCRIPTION:
     "SQLink is a Node.js library that turns MySQL tables into RESTful APIs with procedure execution and full CRUD support.",
@@ -58,5 +58,8 @@ export const STRINGS = {
     WEBSITE: "https://sqlinkjs.github.io/",
     NPM: "https://www.npmjs.com/package/sqlink",
     GITHUB: "https://github.com/Santhoshlm10/SQLink"
-  }
+  },
+  ALREADY_UP_TO_DATE: "SQLink is already on the latest version!",
+  NEW_VERSION_AVAILABLE: "New version of SQLink is available",
+  CURRENT_VERSION: "Current Version: "
 };

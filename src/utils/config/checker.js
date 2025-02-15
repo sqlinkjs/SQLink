@@ -66,3 +66,12 @@ export async function initConfiguration(){
     db_config = jsonData
     return;
 }
+
+export async function getAppLatestVersion(){
+    let res = await fetch("https://registry.npmjs.com/sqlink")
+    let data = await res.json();
+    if(data["dist-tags"]["latest"]){
+        return data["dist-tags"]["latest"]
+    }
+    return null;
+}

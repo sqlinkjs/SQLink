@@ -9,7 +9,7 @@ program
   .name(STRINGS.APP_NAME)
   .description(STRINGS.APP_DESCRIPTION)
   .option("run", STRINGS.RUN_COMMAND)
-  .option("update", STRINGS.UPDATE_COMMAND)
+  .option("upgrade", STRINGS.UPDATE_COMMAND)
   .option("config", STRINGS.CONFIG_COMMAND)
   .option("host", STRINGS.HOST_STATIC_FILES)
   .option("generate", STRINGS.GENERATE_ENUMS)
